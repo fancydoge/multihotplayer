@@ -164,7 +164,116 @@
             box-shadow: 0 6px 20px rgba(79, 195, 247, 0.4);
         }
 
-        .privacy-policy {
+        .pricing-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .pricing-plan {
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-plan.popular {
+            border-color: var(--primary-color);
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(79, 195, 247, 0.2);
+        }
+
+        .pricing-plan.popular::before {
+            content: "最受欢迎";
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .pricing-plan h3 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .price {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 20px 0;
+        }
+
+        .price-period {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            margin: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .pricing-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .pricing-features li.disabled::before {
+            content: "✗";
+            color: #f44336;
+        }
+
+        .buy-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 195, 247, 0.4);
+        }
+
+        .buy-btn.disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .buy-btn.disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .refund-policy, .privacy-policy {
             background: var(--light-bg);
             padding: 40px;
             border-radius: 12px;
@@ -172,22 +281,27 @@
             display: none;
         }
 
-        .privacy-policy.active {
+        .refund-policy.active, .privacy-policy.active {
             display: block;
         }
 
-        .privacy-policy h2 {
+        .refund-policy h2, .privacy-policy h2 {
             color: var(--secondary-color);
             margin-bottom: 20px;
             text-align: center;
         }
 
-        .privacy-section {
+        .policy-section {
             margin-bottom: 25px;
         }
 
-        .privacy-section h3 {
+        .policy-section h3 {
             color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .policy-section ul {
+            margin-left: 20px;
             margin-bottom: 10px;
         }
 
@@ -274,6 +388,10 @@
                 margin: 10px;
                 padding: 15px;
             }
+            
+            .pricing-plan.popular {
+                transform: none;
+            }
         }
     </style>
 </head>
@@ -288,7 +406,9 @@
             <ul>
                 <li><a href="#" class="nav-link active" data-target="home">首页</a></li>
                 <li><a href="#" class="nav-link" data-target="features">功能特色</a></li>
+                <li><a href="#" class="nav-link" data-target="pricing">定价</a></li>
                 <li><a href="#" class="nav-link" data-target="download">下载</a></li>
+                <li><a href="#" class="nav-link" data-target="refund-policy">退款政策</a></li>
                 <li><a href="#" class="nav-link" data-target="privacy">隐私政策</a></li>
                 <li><a href="#" class="nav-link" data-target="faq">常见问题</a></li>
             </ul>
@@ -314,21 +434,73 @@
                 </div>
             </div>
 
-           <div class="screenshots">
-    <h2>界面预览</h2>
-    <div class="screenshot-grid">
-        <div class="screenshot">
-            <img src="images/1.jpg" alt="四宫格分屏模式" style="width: 100%; height: 100%; object-fit: cover;">
+            <div class="screenshots">
+                <h2>界面预览</h2>
+                <div class="screenshot-grid">
+                    <div class="screenshot">
+                        <img src="images/1.jpg" alt="四宫格分屏模式" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="screenshot">
+                        <img src="images/2.jpg" alt="画中画模式" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="screenshot">
+                        <img src="images/3.jpg" alt="自定义布局模式" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="screenshot">
-            <img src="images/2.jpg" alt="画中画模式" style="width: 100%; height: 100%; object-fit: cover;">
+
+        <div id="pricing" class="content-section" style="display: none;">
+            <h2 style="text-align: center; margin-bottom: 10px;">选择适合您的版本</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 40px;">所有价格均为一次性买断，永久使用</p>
+            
+            <div class="pricing-table">
+                <div class="pricing-plan">
+                    <h3>免费版</h3>
+                    <div class="price">$0<span class="price-period">永久免费</span></div>
+                    <ul class="pricing-features">
+                        <li>支持2个视频同时播放</li>
+                        <li>基础分屏布局</li>
+                        <li>独立音量控制</li>
+                        <li>本地文件播放</li>
+                        <li class="disabled">4屏分屏模式</li>
+                        <li class="disabled">6屏分屏模式</li>
+                        <li class="disabled">高级布局模板</li>
+                    </ul>
+                    <button class="buy-btn disabled" disabled>当前版本</button>
+                </div>
+                
+                <div class="pricing-plan popular">
+                    <h3>专业版 - 4屏</h3>
+                    <div class="price">$0.88<span class="price-period">一次性买断</span></div>
+                    <ul class="pricing-features">
+                        <li>免费版所有功能</li>
+                        <li>支持最多4个视频同时播放</li>
+                        <li>高级分屏布局</li>
+                        <li>独立音视频控制</li>
+                        <li>画中画模式</li>
+                        <li>布局保存功能</li>
+                        <li class="disabled">6屏分屏模式</li>
+                    </ul>
+                    <button class="buy-btn">立即购买</button>
+                </div>
+                
+                <div class="pricing-plan">
+                    <h3>专业版 - 6屏</h3>
+                    <div class="price">$1.88<span class="price-period">一次性买断</span></div>
+                    <ul class="pricing-features">
+                        <li>免费版所有功能</li>
+                        <li>支持最多6个视频同时播放</li>
+                        <li>所有高级分屏布局</li>
+                        <li>独立音视频控制</li>
+                        <li>画中画模式</li>
+                        <li>布局保存功能</li>
+                        <li>自定义布局模板</li>
+                    </ul>
+                    <button class="buy-btn">立即购买</button>
+                </div>
+            </div>
         </div>
-        <div class="screenshot">
-            <img src="images/3.jpg" alt="自定义布局模式" style="width: 100%; height: 100%; object-fit: cover;">
-        </div>
-    </div>
-</div>
- </div>
 
         <div id="download" class="content-section" style="display: none;">
             <div class="download">
@@ -343,15 +515,55 @@
             </div>
         </div>
 
+        <div id="refund-policy" class="refund-policy">
+            <h2>退款政策</h2>
+            
+            <div class="policy-section">
+                <h3>退款申请时限</h3>
+                <p>对于多视频分屏播放器专业版，我们提供自购买之日起 <strong>7日内</strong> 的退款服务。</p>
+            </div>
+
+            <div class="policy-section">
+                <h3>如何申请退款</h3>
+                <p>由于支付流程由我们的合作伙伴2Checkout（Verifone）处理，如需申请退款，请您直接通过电子邮件联系2Checkout客服团队：</p>
+                <ul>
+                    <li><strong>邮箱地址</strong>: support@2checkout.com</li>
+                    <li><strong>请务必在邮件中提供您的2Checkout订单号，并简要说明退款原因。</strong></li>
+                </ul>
+                <p>2Checkout将审核您的请求并通过电子邮件通知您结果。通常情况下，退款申请会在2天内处理，但某些情况下可能需要更长时间。</p>
+            </div>
+
+            <div class="policy-section">
+                <h3>不予退款的情况</h3>
+                <p>在以下情况下，我们可能无法为您办理退款：</p>
+                <ul>
+                    <li>专业版许可证密钥已被激活并使用。</li>
+                    <li>提出的退款申请已超过规定的退款时限。</li>
+                    <li>存在滥用、欺诈或其他不当行为的证据。</li>
+                    <li>因个人主观原因（如"不再需要"、"不喜欢"等）申请退款。</li>
+                </ul>
+            </div>
+
+            <div class="policy-section">
+                <h3>免费试用</h3>
+                <p>我们提供功能完整的免费版本供您在购买前充分测试。请在购买专业版前确保其能满足您的需求。</p>
+            </div>
+
+            <div class="policy-section">
+                <p><strong>最后更新：2024年1月</strong></p>
+                <p>本政策中的任何内容均不影响您根据适用消费者保护法律享有的权利。</p>
+            </div>
+        </div>
+
         <div id="privacy" class="privacy-policy">
             <h2>隐私权政策</h2>
             
-            <div class="privacy-section">
-                <h3>最后更新日期：2024年5月</h3>
+            <div class="policy-section">
+                <h3>最后更新日期：2025年11月</h3>
                 <p>我们高度重视您的隐私。本隐私权政策旨在清晰说明"多视频分屏播放器"扩展如何收集、使用、存储和保护您的信息。</p>
             </div>
 
-            <div class="privacy-section">
+            <div class="policy-section">
                 <h3>1. 信息收集与使用</h3>
                 <p>我们承诺最大限度地减少数据收集。本插件的核心功能在您的浏览器本地完成，无需将您的个人数据或视频内容发送至我们的服务器。</p>
                 <p><strong>我们收集的信息：</strong></p>
@@ -362,7 +574,7 @@
                 </ul>
             </div>
 
-            <div class="privacy-section">
+            <div class="policy-section">
                 <h3>2. 权限使用理由</h3>
                 <ul>
                     <li><strong>host_permissions：</strong>用于检测并访问视频网站，获取视频源嵌入分屏界面</li>
@@ -372,17 +584,17 @@
                 </ul>
             </div>
 
-            <div class="privacy-section">
+            <div class="policy-section">
                 <h3>3. 数据共享与披露</h3>
                 <p>我们<strong>不会</strong>出售、交易或将以其他方式将您的信息转让给任何外部方。</p>
             </div>
 
-            <div class="privacy-section">
+            <div class="policy-section">
                 <h3>4. 数据安全</h3>
                 <p>我们采用符合行业标准的措施来保护您存储在本地的数据。所有数据都通过Chrome浏览器的安全沙箱进行隔离和存储。</p>
             </div>
 
-            <div class="privacy-section">
+            <div class="policy-section">
                 <h3>5. 您的权利</h3>
                 <p>您随时可以：</p>
                 <ul>
@@ -391,10 +603,10 @@
                 </ul>
             </div>
 
-            <div class="privacy-section">
+            <div class="policy-section">
                 <h3>6. 联系我们</h3>
                 <p>如果您对本隐私政策有任何疑问，请通过以下方式联系我们：</p>
-                <p><strong>联系邮箱：</strong> 465349488@qq.com</p>
+                <p><strong>联系邮箱：</strong> your-email@domain.com</p>
             </div>
         </div>
 
@@ -408,7 +620,7 @@
                         <span>+</span>
                     </div>
                     <div class="faq-answer">
-                        支持大多数主流视频网站，包括spankbang、jable等，以及本地视频文件。
+                        支持大多数主流视频网站，包括YouTube、Bilibili、Vimeo等，以及本地视频文件。
                     </div>
                 </div>
 
@@ -418,7 +630,7 @@
                         <span>+</span>
                     </div>
                     <div class="faq-answer">
-                        本扩展完全免费使用，无任何隐藏费用或订阅要求。
+                        基础功能完全免费使用。专业版提供4屏($0.88)和6屏($1.88)功能，一次性买断，永久使用。
                     </div>
                 </div>
 
@@ -438,7 +650,17 @@
                         <span>+</span>
                     </div>
                     <div class="faq-answer">
-                        目前支持2-6个视频同时播放，具体数量取决于您的设备性能。
+                        免费版支持2个视频，专业版支持4个或6个视频同时播放，具体数量取决于您的设备性能。
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        如何申请退款？
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        购买后7天内，通过邮件联系support@2checkout.com并提供订单号申请退款。详细政策请见<a href="#" class="nav-link" data-target="refund-policy" style="color: var(--primary-color);">退款政策</a>页面。
                     </div>
                 </div>
             </div>
@@ -446,9 +668,11 @@
 
         <div class="footer">
             <div class="footer-links">
+                <a href="#" class="nav-link" data-target="pricing">定价</a>
+                <a href="#" class="nav-link" data-target="refund-policy">退款政策</a>
                 <a href="#" class="nav-link" data-target="privacy">隐私政策</a>
                 <a href="#" class="nav-link" data-target="faq">常见问题</a>
-                <a href="mailto:465349488@qq.com">联系我们</a>
+                <a href="mailto:your-email@domain.com">联系我们</a>
             </div>
             <p>© 2024 多视频分屏播放器. 所有权利保留.</p>
         </div>
@@ -471,12 +695,12 @@
                 document.querySelectorAll('.content-section').forEach(section => {
                     section.style.display = 'none';
                 });
-                document.querySelectorAll('.privacy-policy').forEach(section => {
+                document.querySelectorAll('.refund-policy, .privacy-policy').forEach(section => {
                     section.classList.remove('active');
                 });
                 
-                if (target === 'privacy') {
-                    document.getElementById('privacy').classList.add('active');
+                if (target === 'refund-policy' || target === 'privacy') {
+                    document.getElementById(target).classList.add('active');
                 } else if (target === 'home') {
                     document.getElementById('home').style.display = 'block';
                 } else {
@@ -528,6 +752,13 @@
         // 页面加载时显示首页
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('home').style.display = 'block';
+        });
+
+        // 购买按钮提示
+        document.querySelectorAll('.buy-btn:not(.disabled)').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('支付系统正在集成中，即将开放购买！');
+            });
         });
     </script>
 </body>
