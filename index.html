@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>多视频分屏播放器 - 官方网站</title>
+    <!-- 引入 Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #4fc3f7;
@@ -374,6 +376,141 @@
             transform: translateY(-3px);
         }
 
+        /* ===== 新增：FancyDoge Game 区域样式 ===== */
+        .games-section {
+            margin: 60px 0 40px 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #fdfcfb 0%, #f5f7fa 100%);
+            border-radius: 16px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .games-section h2 {
+            text-align: center;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .games-section h2 i {
+            color: #764ba2;
+        }
+
+        .games-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 25px;
+            justify-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .game-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 160px;
+            height: 180px;
+            background: white;
+            border-radius: 20px;
+            border: 2px solid #e0e0e0;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            padding: 20px 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .game-button:hover {
+            transform: translateY(-8px);
+            border-color: #764ba2;
+            box-shadow: 0 15px 30px rgba(118, 75, 162, 0.15);
+        }
+
+        .game-button.active:hover {
+            border-color: #4fc3f7;
+            box-shadow: 0 15px 30px rgba(79, 195, 247, 0.2);
+        }
+
+        .game-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 18px;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #999;
+            border: 2px dashed #ddd;
+        }
+
+        .game-button.active .game-icon {
+            background: linear-gradient(135deg, #4fc3f7, #0288d1);
+            color: white;
+            border: none;
+        }
+
+        .game-button.coming-soon .game-icon {
+            background: #f9f9f9;
+            color: #ccc;
+        }
+
+        .game-title {
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .game-desc {
+            font-size: 0.85em;
+            color: #777;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .game-button.coming-soon .game-title,
+        .game-button.coming-soon .game-desc {
+            color: #bbb;
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #4CAF50;
+            color: white;
+            font-size: 0.7em;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .game-button.coming-soon .status-badge {
+            background: #FF9800;
+            content: "开发中";
+        }
+
+        /* 响应式调整 */
         @media (max-width: 768px) {
             .nav ul {
                 flex-direction: column;
@@ -391,6 +528,19 @@
             
             .pricing-plan.popular {
                 transform: none;
+            }
+            
+            .games-section {
+                padding: 30px 20px;
+                margin: 40px 0 30px 0;
+            }
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 20px;
+            }
+            .game-button {
+                width: 140px;
+                height: 160px;
             }
         }
     </style>
@@ -695,171 +845,6 @@
                 </div>
             </div>
         </div>
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>多视频分屏播放器 - 官方网站</title>
-    <style>
-        /* 此处是你原有的全部CSS样式，为节省篇幅已省略，但已完整保留 */
-        /* ... 你原有的所有CSS代码 ... */
-
-        /* ===== 新增：FancyDoge Game 区域样式 ===== */
-        .games-section {
-            margin: 60px 0 40px 0;
-            padding: 40px;
-            background: linear-gradient(135deg, #fdfcfb 0%, #f5f7fa 100%);
-            border-radius: 16px;
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-        }
-
-        .games-section h2 {
-            text-align: center;
-            font-size: 2.2em;
-            margin-bottom: 10px;
-            color: #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .games-section h2 i {
-            color: #764ba2;
-        }
-
-        .games-subtitle {
-            text-align: center;
-            color: #666;
-            font-size: 1.1em;
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 25px;
-            justify-items: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .game-button {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 160px;
-            height: 180px;
-            background: white;
-            border-radius: 20px;
-            border: 2px solid #e0e0e0;
-            text-decoration: none;
-            color: #333;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            padding: 20px 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            position: relative;
-        }
-
-        .game-button:hover {
-            transform: translateY(-8px);
-            border-color: #764ba2;
-            box-shadow: 0 15px 30px rgba(118, 75, 162, 0.15);
-        }
-
-        .game-button.active:hover {
-            border-color: #4fc3f7;
-            box-shadow: 0 15px 30px rgba(79, 195, 247, 0.2);
-        }
-
-        .game-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 18px;
-            background: #f5f5f5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            font-size: 28px;
-            color: #999;
-            border: 2px dashed #ddd;
-        }
-
-        .game-button.active .game-icon {
-            background: linear-gradient(135deg, #4fc3f7, #0288d1);
-            color: white;
-            border: none;
-        }
-
-        .game-button.coming-soon .game-icon {
-            background: #f9f9f9;
-            color: #ccc;
-        }
-
-        .game-title {
-            font-weight: 600;
-            font-size: 1.1em;
-            margin-bottom: 8px;
-            text-align: center;
-        }
-
-        .game-desc {
-            font-size: 0.85em;
-            color: #777;
-            text-align: center;
-            line-height: 1.4;
-        }
-
-        .game-button.coming-soon .game-title,
-        .game-button.coming-soon .game-desc {
-            color: #bbb;
-        }
-
-        .status-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #4CAF50;
-            color: white;
-            font-size: 0.7em;
-            padding: 3px 8px;
-            border-radius: 10px;
-            font-weight: bold;
-        }
-
-        .game-button.coming-soon .status-badge {
-            background: #FF9800;
-            content: "开发中";
-        }
-
-        /* 响应式调整 */
-        @media (max-width: 768px) {
-            .games-section {
-                padding: 30px 20px;
-                margin: 40px 0 30px 0;
-            }
-            .games-grid {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-                gap: 20px;
-            }
-            .game-button {
-                width: 140px;
-                height: 160px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <!-- 此处是你原有的全部HTML内容，为节省篇幅已省略，但已完整保留 -->
-        <!-- ... 你原有的所有HTML内容（Header, Nav, 各内容区块, FAQ等）... -->
 
         <!-- ===== 新增：FancyDoge Game 区域 ===== -->
         <div class="games-section">
@@ -877,15 +862,15 @@
                     <div class="game-desc">狗头NFT记忆配对，挑战你的大脑极限！</div>
                 </a>
                 
-                <!-- Game 2: (预留位置) -->
-                <div class="game-button coming-soon" title="开发中，敬请期待">
-                    <div class="status-badge">开发中</div>
+                <!-- Game 2: Flash Game (已上线) - 这是修改的地方 -->
+                <a href="http://flashgame.fancydoge.xyz" class="game-button active" target="_blank" title="点击进入游戏">
+                    <div class="status-badge">已上线</div>
                     <div class="game-icon">
-                        <i class="fas fa-question"></i>
+                        <i class="fas fa-bolt"></i>
                     </div>
-                    <div class="game-title">Game 2</div>
-                    <div class="game-desc">神秘游戏正在开发...</div>
-                </div>
+                    <div class="game-title">闪电解密</div>
+                    <div class="game-desc">快节奏的解密挑战，考验你的反应速度！</div>
+                </a>
                 
                 <!-- Game 3: (预留位置) -->
                 <div class="game-button coming-soon" title="开发中，敬请期待">
@@ -910,32 +895,6 @@
         </div>
         <!-- ===== 新增区域结束 ===== -->
 
-     
-    <a href="#" class="back-to-top">↑</a>
-
-    <!-- 引入 Font Awesome 图标库（如果尚未引入） -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <script>
-        // 此处是你原有的全部JavaScript，为节省篇幅已省略，但已完整保留
-        // ... 你原有的所有JavaScript代码 ...
-
-        // 新增：为游戏按钮添加简单的点击提示（不影响原有功能）
-        document.addEventListener('DOMContentLoaded', function() {
-            const gameButtons = document.querySelectorAll('.game-button');
-            gameButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    if (this.classList.contains('coming-soon')) {
-                        e.preventDefault(); // 阻止默认链接跳转
-                        alert('🎮 游戏正在全力开发中，敬请期待！');
-                    }
-                    // 如果是 active 的按钮，会正常跳转到 href 指定的链接
-                });
-            });
-        });
-    </script>
-</body>
-</html>
         <div class="footer">
             <div class="footer-links">
                 <a href="#" class="nav-link" data-target="pricing">定价</a>
